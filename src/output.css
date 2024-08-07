@@ -593,6 +593,11 @@ video {
   margin-bottom: 0.75rem;
 }
 
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .mb-2 {
   margin-bottom: 0.5rem;
 }
@@ -628,6 +633,10 @@ video {
 .h-fit {
   height: -moz-fit-content;
   height: fit-content;
+}
+
+.h-full {
+  height: 100%;
 }
 
 .w-full {
@@ -799,6 +808,11 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.text-teal-600 {
+  --tw-text-opacity: 1;
+  color: rgb(13 148 136 / var(--tw-text-opacity));
+}
+
 .outline-none {
   outline: 2px solid transparent;
   outline-offset: 2px;
@@ -829,6 +843,10 @@ video {
     flex-direction: row;
   }
 
+  .sm\:items-center {
+    align-items: center;
+  }
+
   .sm\:p-5 {
     padding: 1.25rem;
   }
@@ -849,12 +867,28 @@ video {
     flex-direction: row;
   }
 
+  .md\:flex-col {
+    flex-direction: column;
+  }
+
   .md\:overflow-x-scroll {
     overflow-x: scroll;
+  }
+
+  .md\:overflow-y-scroll {
+    overflow-y: scroll;
   }
 }
 
 @media (min-width: 1024px) {
+  .lg\:h-\[92\.8vh\] {
+    height: 92.8vh;
+  }
+
+  .lg\:flex-row {
+    flex-direction: row;
+  }
+
   .lg\:overflow-hidden {
     overflow: hidden;
   }
