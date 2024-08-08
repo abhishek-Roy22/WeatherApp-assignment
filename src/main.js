@@ -2,6 +2,7 @@ const apiKey = '5aeb33e759a140ada81140327232001';
 
 const form = document.querySelector('#form');
 const currentButton = document.querySelector('#current_btn');
+const inputField = document.querySelector('#city');
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -182,3 +183,50 @@ async function doSomething(lati, long) {
 
 // Call this function when browser load
 window.onload = getCurrentLocation();
+
+// Implementing dropdown
+function addToSearchHistory(cityName) {
+  let searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
+
+  if (!searchHistory.includes(cityName)) {
+    searchHistory.push(cityName);
+    if (searchHistory.length > 5) {
+      searchHistory.shift();
+    }
+    localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+  }
+  if (searchHistory.length > 0) {
+    displaySearchHistory();
+  }
+}
+
+function displaySearchHistory() {
+  const searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
+  const historyList = document.getElementById('dropdown');
+  historyList.innerHTML = '';
+
+  searchHistory.forEach((city) => {
+    const listItem = document.createElement('li');
+    listItem.className =
+      'p-2 cursor-pointer hover:bg-[#f0f0f0] text no-underline';
+    listItem.textContent = city;
+
+    listItem.addEventListener('click', () => {
+      inputField.value = city;
+      fetchWeatherData(city);
+      fetchForecastWeatherData(city);
+    });
+
+    historyList.appendChild(listItem);
+  });
+}
+
+inputField.addEventListener('input', () => {
+  document.getElementById('dropdown').style.display = 'block';
+});
+
+inputField.addEventListener('focusout', () => {
+  setTimeout(() => {
+    document.getElementById('dropdown').style.display = 'none';
+  }, 200);
+});
