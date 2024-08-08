@@ -37,3 +37,8 @@ The Weather App is an application that allows users to search for the current we
 ```
 npx tailwindcss -i ./src/input.css -o ./src/output.css --watch
 ```
+
+## GitHub Repo Link
+
+--
+[Github:-](https://github.com/abhishek-Roy22/WeatherApp-assignment)
