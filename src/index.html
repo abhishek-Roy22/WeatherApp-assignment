@@ -15,12 +15,12 @@
       <section
         class="w-full h-full lg:h-[92.8vh] flex flex-col sm:flex-row p-2 sm:p-5"
       >
-        <div class="w-full sm:w-80 h-auto sm:h-full flex flex-col">
+        <form id="form" class="w-full sm:w-80 h-auto sm:h-full flex flex-col">
           <label for="city" class="font-bold text-black mb-2 text-2xl"
             >Enter a City Name</label
           >
           <input
-            type="text"
+            type="search"
             name="city"
             class="bg-white outline-none px-3 py-2 border border-gray-400 border-solid rounded-md mb-3"
             id="city"
@@ -30,7 +30,7 @@
           />
           <button
             id="button"
-            type="button"
+            type="submit"
             class="bg-blue-500 w-full text-gray-100 border-none outline-none px-3 py-2 rounded-md"
           >
             Search
@@ -47,7 +47,7 @@
           >
             Use Current Location
           </button>
-        </div>
+        </form>
         <div class="flex-1 flex flex-col gap-3 sm:p-5 mt-5 sm:mt-0">
           <div class="w-full bg-blue-500 p-5 flex justify-between rounded-md">
             <div class="flex flex-col gap-4">

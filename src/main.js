@@ -1,14 +1,12 @@
-const btn = document.querySelector('#button');
+const apiKey = '5aeb33e759a140ada81140327232001';
+
+const form = document.querySelector('#form');
 const currentButton = document.querySelector('#current_btn');
 
-btn.addEventListener('click', () => {
-  fetchWeatherData();
-  fetchForecastWeatherData();
-});
-
-// function to fetch current weatherData
-async function fetchWeatherData() {
-  let cityName = document.querySelector('#city').value.trim();
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const cityInput = document.querySelector('#city');
+  const cityName = cityInput.value.trim();
   // validate input field
   if (cityName === '') {
     alert('Please Enter City Name to get Weather!');
@@ -22,15 +20,20 @@ async function fetchWeatherData() {
     );
     return;
   }
+  cityInput.value = '';
+  fetchWeatherData(cityName);
+  fetchForecastWeatherData(cityName);
+  addToSearchHistory(cityName);
+});
 
+// function to fetch current weatherData
+async function fetchWeatherData(cityName) {
+  const apiUrl = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${cityName}&aqi=no`;
   // try and catch block to catch error
   try {
-    const res = await fetch(
-      `http://api.weatherapi.com/v1/current.json?key=5aeb33e759a140ada81140327232001&q=${cityName}&aqi=no`,
-      {
-        method: 'GET',
-      }
-    );
+    const res = await fetch(apiUrl, {
+      method: 'GET',
+    });
     // checking if res is ok or not
     if (!res.ok) {
       throw new Error(`Error: ${res.statusText}`);
@@ -77,30 +80,14 @@ function createUI(data) {
 }
 
 // fuction to fetch forecast weather data for upto 5 days
-async function fetchForecastWeatherData() {
-  let cityName = document.querySelector('#city').value.trim();
-  // validate input field
-  if (cityName === '') {
-    alert('Please Enter City Name to get Weather!');
-    return;
-  }
-
-  const regex = /\d/;
-  if (regex.test(cityName)) {
-    alert(
-      'CityName should not contain any Number Value, please provide String'
-    );
-    return;
-  }
+async function fetchForecastWeatherData(cityName) {
+  const apiUrl = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${cityName}&days=5&aqi=no&alerts=no`;
 
   // try and catch block to catch error
   try {
-    const res = await fetch(
-      `http://api.weatherapi.com/v1/forecast.json?key=5aeb33e759a140ada81140327232001&q=${cityName}&days=5&aqi=no&alerts=no`,
-      {
-        method: 'GET',
-      }
-    );
+    const res = await fetch(apiUrl, {
+      method: 'GET',
+    });
     // checking if res is ok or not
     if (!res.ok) {
       throw new Error(`Error: ${res.statusText}`);
@@ -150,7 +137,6 @@ function createCardUI(data) {
 }
 
 // click event for current location
-
 currentButton.addEventListener('click', getCurrentLocation, { once: true });
 
 // get Current location
